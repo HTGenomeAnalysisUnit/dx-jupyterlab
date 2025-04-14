@@ -1,0 +1,53 @@
+{
+  "name": "jupyterlab_app",
+  "title": "JupyterLab App",
+  "summary": "JupyterLab instance from a docker image",
+  "project": "project-Gx25k98J08pkk84J3V1JPPGY",
+  "folder": "/apps",
+  "dxapi": "1.0.0",
+  "version": "1.0.0",
+  "regionalOptions": {
+    "aws:eu-west-2": {
+      "systemRequirements": {
+        "*": {
+          "instanceType": "mem1_ssd1_v2_x4"
+        }
+      }
+    }
+  },
+  "inputSpec": [
+    {
+      "name": "docker_image",
+      "label": "Docker image to run",
+      "help": "Address of the docker image to use from DocekrHub",
+      "class": "string"
+    },
+    {
+      "name": "use_gpu",
+      "label": "Enable GPU",
+      "help": "Enable GPU support, please select a GPU instance type",
+      "class": "bool",
+      "default": false
+    }
+  ],
+  "outputSpec": [],
+  "runSpec": {
+    "interpreter": "bash",
+    "distribution": "Ubuntu",
+    "release": "20.04",
+    "version": "0",
+    "file": "src/code.sh",
+    "execDepends": [{ "name": "fuse" }],
+    "timeoutPolicy": {
+      "*": {
+        "hours": 8
+      }
+    },
+    "nvidiaDriver": "R535"
+  },
+  "access": { "network": ["*"] },
+  "httpsApp": {
+    "ports": [443],
+    "shared_access": "VIEW"
+  }
+}
